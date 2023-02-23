@@ -12,41 +12,39 @@
 #include <stdlib.h>
 
 int main() {
-    int n, k, i, j, temp;
-
-    // Ask the user to enter the number of elements in the array
-    printf("Enter the number of elements in the array: ");
+    int n, k, i, j, temp, *arr;
+    
     scanf("%d", &n);
-
-    // Dynamically allocate memory for the array
-    int* arr = (int*) malloc(n * sizeof(int));
-
-    // Ask the user to enter k elements and insert them into the array
-    printf("Enter %d elements:\n", k);
-    for (i = 0; i < k; i++) {
+    
+    arr = (int*) malloc(n * sizeof(int)); 
+    
+    for (i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }
-
-    // Sort the array in ascending order using bubble sort algorithm
-    for (i = 0; i < k-1; i++) {
-        for (j = 0; j < k-i-1; j++) {
-            if (arr[j] > arr[j+1]) {
-                temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
+    
+    scanf("%d", &k);
+    
+    arr = (int*) realloc(arr, (n+k) * sizeof(int)); 
+    
+    for (i = n; i < n+k; i++) {
+        scanf("%d", &arr[i]);
+    }
+    
+    for (i = 0; i < n+k-1; i++) {
+        for (j = i+1; j < n+k; j++) {
+            if (arr[i] > arr[j]) {
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
         }
     }
-
-    // Print the sorted array in ascending order
-    printf("The sorted array in ascending order:\n");
-    for (i = 0; i < k; i++) {
+    
+    for (i = 0; i < n+k; i++) {
         printf("%d ", arr[i]);
     }
-    printf("\n");
-
-    // Free the dynamically allocated memory
+    
     free(arr);
-
+    
     return 0;
 }
